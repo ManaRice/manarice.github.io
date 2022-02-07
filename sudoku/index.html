@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Sudoku - ManaRice</title>
+        <link rel="stylesheet" href="./index.css">
+        <script src="index.js" defer></script>
+    </head>
+    <body>
+        <h1 id="title">Sudoku by ManaRice</h1>
+        <main>
+            <div class="board">
+                <div class="separator-row"></div>
+
+                <div class="row">
+                    <div class="separator-col"></div>
+                    <div id="0" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="1" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="2" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="3" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="4" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="5" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="6" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="7" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="8" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                </div>
+
+                <div class="row">
+                    <div class="separator-col"></div>
+                    <div id="9" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="10" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="11" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="12" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="13" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="14" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="15" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="16" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="17" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                </div>
+
+                <div class="row">
+                    <div class="separator-col">
+                    </div>
+                    <div id="18" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="19" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="20" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="21" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="22" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="23" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="24" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="25" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="26" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                </div>
+
+                <div class="separator-row"></div>
+
+                <div class="row">
+                    <div class="separator-col"></div>
+                    <div id="27" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="28" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="29" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="30" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="31" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="32" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="33" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="34" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="35" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                </div>
+
+                <div class="row">
+                    <div class="separator-col"></div>
+                    <div id="36" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="37" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="38" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="39" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="40" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="41" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="42" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="43" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="44" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                </div>
+
+                <div class="row">
+                    <div class="separator-col"></div>
+                    <div id="45" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="46" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="47" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="48" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="49" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="50" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="51" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="52" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="53" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                </div>
+
+                <div class="separator-row"></div>
+
+                <div class="row">
+                    <div class="separator-col"></div>
+                    <div id="54" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="55" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="56" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="57" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="58" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="59" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="60" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="61" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="62" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                </div>
+
+                <div class="row">
+                    <div class="separator-col"></div>
+                    <div id="63" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="64" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="65" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="66" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="67" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="68" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="69" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="70" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="71" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                </div>
+
+                <div class="row">
+                    <div class="separator-col"></div>
+                    <div id="72" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="73" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="74" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="75" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="76" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="77" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                    <div id="78" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="79" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div id="80" class="col" onclick="selectNumber(this.id)">0</div>
+                    <div class="separator-col"></div>
+                </div>
+
+                <div class="separator-row"></div>
+            </div>
+            <div id="sel" class="selector">
+                <div id="index-holder" class="hidden"></div>
+                <div class="sel-row">
+                    <div id="sel1" class="sel-button" onclick="changeNumber(this.innerHTML, document.getElementById('index-holder').innerHTML)">
+                        1
+                    </div>
+                    <div id="sel2" class="sel-button" onclick="changeNumber(this.innerHTML, document.getElementById('index-holder').innerHTML)">
+                        2
+                    </div>
+                    <div id="sel3" class="sel-button" onclick="changeNumber(this.innerHTML, document.getElementById('index-holder').innerHTML)">
+                        3
+                    </div>
+                </div>
+                <div class="sel-row">
+                    <div id="sel4" class="sel-button" onclick="changeNumber(this.innerHTML, document.getElementById('index-holder').innerHTML)">
+                        4
+                    </div>
+                    <div id="sel5" class="sel-button" onclick="changeNumber(this.innerHTML, document.getElementById('index-holder').innerHTML)">
+                        5
+                    </div>
+                    <div id="sel6" class="sel-button" onclick="changeNumber(this.innerHTML, document.getElementById('index-holder').innerHTML)">
+                        6
+                    </div>
+                </div>
+                <div class="sel-row">
+                    <div id="sel7" class="sel-button" onclick="changeNumber(this.innerHTML, document.getElementById('index-holder').innerHTML)">
+                        7
+                    </div>
+                    <div id="sel8" class="sel-button" onclick="changeNumber(this.innerHTML, document.getElementById('index-holder').innerHTML)">
+                        8
+                    </div>
+                    <div id="sel9" class="sel-button" onclick="changeNumber(this.innerHTML, document.getElementById('index-holder').innerHTML)">
+                        9
+                    </div>
+                </div>
+                <div class="sel-row">
+                    <div id="sel-clear" class="sel-button" onclick="changeNumber(this.innerHTML, document.getElementById('index-holder').innerHTML)">
+                        Clear
+                    </div>
+                </div>
+            </div>
+            </main>
+
+
+    </body>
+</html>
