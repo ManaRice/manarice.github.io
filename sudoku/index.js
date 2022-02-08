@@ -21,6 +21,19 @@ var board = [
 ]
 
 /*
+//Board with 2 solutions
+var board = [
+    new Cell(0), new Cell(0), new Cell(0), new Cell(4), new Cell(8), new Cell(9), new Cell(0), new Cell(0), new Cell(0),
+    new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(4), new Cell(0),
+    new Cell(5), new Cell(0), new Cell(8), new Cell(0), new Cell(0), new Cell(0), new Cell(1), new Cell(3), new Cell(0),
+    new Cell(6), new Cell(1), new Cell(0), new Cell(9), new Cell(3), new Cell(0), new Cell(0), new Cell(8), new Cell(4),
+    new Cell(2), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(9), new Cell(5), new Cell(0),
+    new Cell(0), new Cell(9), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(7),
+    new Cell(0), new Cell(8), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(0),
+    new Cell(4), new Cell(0), new Cell(2), new Cell(6), new Cell(1), new Cell(0), new Cell(0), new Cell(0), new Cell(0),
+    new Cell(9), new Cell(0), new Cell(0), new Cell(0), new Cell(0), new Cell(7), new Cell(0), new Cell(0), new Cell(2),
+]
+
 
 var board = [
     new Cell(3),new Cell(0),new Cell(6),new Cell(5),new Cell(0),new Cell(8),new Cell(4),new Cell(0),new Cell(0),
@@ -136,21 +149,20 @@ function solveBoard(board, counter) {
                 var sqr = getSqr(i, board);
 
                 if (uniqueArray(row) && uniqueArray(col) && uniqueArray(sqr)) {
-                    if (checkBoard(board)){
+                    if (checkBoard(board)) {
                         counter++;
                         break;
                     }
-                    else{
-                        counter = solveBoard(board, counter);
-                        if (counter > 1)
-                            return counter;
-                    }
+                    counter = solveBoard(board, counter);
+                    if (counter > 1)
+                        return counter;
                 }
                 board[i] = new Cell(0);
             }
             break;
         }
     }
+    board[i] = new Cell(0);
     return counter;
 }
 
@@ -186,7 +198,7 @@ function generateFullBoard(board) {
 function newBoard() {
     generateFullBoard(board);
 
-    var attempts = 5;
+    var attempts = 10;
 
     var index;
     var cellVal;
@@ -199,12 +211,14 @@ function newBoard() {
 
             cellVal = board[index].val;
             board[index] = new Cell(0);
-            copy = Object.assign([], board);
-        } while(solveBoard(copy, 0) <= 1);
+            copy = [...board];
+        } while(solveBoard(copy, 0) < 2);
 
-        board[index].val = cellVal;
-        board[index].gen = true;
+        board[index] = new Cell(cellVal);
     }
+
+    copy = [...board];
+    console.log(solveBoard(copy, 0));
 }
 
 
