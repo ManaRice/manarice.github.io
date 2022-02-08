@@ -144,9 +144,7 @@ function solveBoard(board, counter) {
                         counter = solveBoard(board, counter);
                         if (counter > 1)
                             return counter;
-                        //board[i] = new Cell(0);
                     }
-
                 }
                 board[i] = new Cell(0);
             }
