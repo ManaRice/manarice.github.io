@@ -142,7 +142,9 @@ function solveBoard(board, counter) {
                     }
                     else{
                         counter = solveBoard(board, counter);
-                        board[i] = new Cell(0);
+                        if (counter > 1)
+                            return counter;
+                        //board[i] = new Cell(0);
                     }
 
                 }
@@ -185,21 +187,26 @@ function generateFullBoard(board) {
 
 function newBoard() {
     generateFullBoard(board);
+
+    var attempts = 5;
+
     var index;
     var cellVal;
-    for (var i = 0; i < 40; i++) {
+    var copy;
+    for (var i = 0; i < attempts; i++) {
         do {
-            index = Math.floor(Math.random() * 80);
-        } while(board[index].val == 0);
-        cellVal = board[index].val;
-        board[index] = new Cell(0);
-        var copy = Object.assign([], board);
-        if (solveBoard(copy, 0) > 1)
-            break;
-    }
+            do {
+                index = Math.floor(Math.random() * 80);
+            } while(board[index].val == 0);
 
-    board[index].val = cellVal;
-    board[index].gen = true;
+            cellVal = board[index].val;
+            board[index] = new Cell(0);
+            copy = Object.assign([], board);
+        } while(solveBoard(copy, 0) <= 1);
+
+        board[index].val = cellVal;
+        board[index].gen = true;
+    }
 }
 
 
