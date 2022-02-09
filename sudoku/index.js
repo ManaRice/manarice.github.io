@@ -234,7 +234,7 @@ function disableSel() {
 }
 
 function selectNumber(id) {
-    if (board.isCellGenerated()) return;
+    if (board.isCellGenerated(id)) return;
     let sel = document.getElementById("sel");
     let cell = document.getElementById(id);
     if (!sel.classList.contains("active")){
