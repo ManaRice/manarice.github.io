@@ -2,6 +2,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 0;
     background-color: #667;
 }
 
@@ -20,13 +21,14 @@ p {
 #title {
     margin-top: 0;
     margin-bottom: 0.3%;
+    font-size: 1.4rem;
 }
 .board {
     display: flex;
     width: 43vw;
-    min-width: 430px;
+    min-width: 330px;
     height: 43vw;
-    min-height: 430px;
+    min-height: 330px;
     align-items: space-between;
     flex-direction: column;
     font-size: 1.7rem;

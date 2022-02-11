@@ -1,3 +1,24 @@
+/*
+ *  Sudoku game made by ManaRice (Douglas Modin Lindström)
+ *  on manarice.github.io.
+ *
+ *  This is my first attempt at creating a sudoku game
+ *  The functionality of the board may be moved to a language
+ *  that can generate WASM in the future.
+ *
+ */
+
+
+
+
+
+/*
+ *  A cell contains of a number and the information
+ *  if it was generated or if the user has the ability
+ *  to change the number in the cell
+ *
+ */
+
 class Cell {
     constructor(val) {
         this.val = val;
@@ -6,9 +27,35 @@ class Cell {
     }
 }
 
+/*
+ *  The difficulty indicates how many iterations the generation
+ *  step will fail in removing a new number from a fully
+ *  solved board.
+ *
+ *  HARD   = 10 failed attempts
+ *  MEDIUM = 5  failed attempts
+ *  EAZY   = 1  failed attempt
+ *
+ *  The difficultys are not final in any way and may change
+ *  at any time in development
+ *
+ */
+
 const EAZY   = 1;
 const MEDIUM = 5;
 const HARD   = 10;
+
+
+/*
+ *  A board is a collection of 9 x 9 cells
+ *  that can generate a valid sudoku board.
+ *
+ *  To generate a board you need to instanciate a
+ *  board with a difficulty and call board.generateNewBoard().
+ *  This process will go through all the steps to make a valid
+ *  sudoku board.
+ *
+ */
 
 class Board {
     constructor(difficulty) {
@@ -19,6 +66,8 @@ class Board {
         this.difficulty = difficulty;
     }
 
+    // Used to run the solve() method.
+    // This method may leave some solved cells in the board.
     clone() {
         var copy = new Board(this.difficulty);
         copy.numberList = [...this.numberList];
@@ -26,6 +75,7 @@ class Board {
         return copy;
     }
 
+    // Inatiate the board with zeros.
     zeroCells() {
         for (var i = 0; i < this.width * this.height; i++) {
             this.cells.push(new Cell(0));
@@ -44,6 +94,7 @@ class Board {
         return this.cells[index].gen
     }
 
+    // Used to generate random boards
     // Stolen from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
     shuffleNumberlist(){
         for (var i = this.numberList.length - 1; i > 0; i--) {
@@ -52,6 +103,9 @@ class Board {
         }
     }
 
+    // Check if an array contains only unique elements
+    // Exept for multiple zeros.
+    // Used for checking if row, column or square is valid
     uniqueArray(arr) {
         var temp = [];
         for (var i = 0; i < arr.length; i++) {
@@ -74,6 +128,8 @@ class Board {
 
     }
 
+    // Returns an array containing the column the cell of "index"
+    // belongs to
     getCol(index) {
         var col = [];
         var coli = index % 9;
@@ -82,7 +138,8 @@ class Board {
         }
         return col;
     }
-
+    // Returns an array containing the row the cell of "index"
+    // belongs to
     getRow(index) {
         var row = [];
         var rowi = index - index % 9;
@@ -92,6 +149,8 @@ class Board {
         return row;
     }
 
+    // Returns an array containing the square the cell of "index"
+    // belongs to
     getSqr(index) {
         var sqr = [];
         var sqri = ((index % 9) - (index % 3)) + Math.floor(Math.floor(index / 9) / 3) * 9 * 3;
@@ -101,6 +160,7 @@ class Board {
         return sqr;
     }
 
+    // Check if the board is solved
     check() {
         if (this.boardContainsZero())
             return false;
@@ -124,6 +184,9 @@ class Board {
         return true;
     }
 
+    // Returns the number of solutions this board has at current state.
+    // Will return max 2, because if the number of solutions are greater
+    // than 1 it is not a valid sudoku board so it is irelevant calculations
     solve(counter) {
         for (var i = 0; i < this.cells.length; i++) {
             if (this.cells[i].val == 0) {
@@ -151,7 +214,7 @@ class Board {
         return counter;
     }
 
-
+    // Generates a fully solved valid sudoku board
     generateFullBoard() {
         var i;
         for (i = 0; i < this.cells.length; i++) {
@@ -179,11 +242,13 @@ class Board {
         return false;
     }
 
+    // Returns if the current board is valid e.i has exactly 1 solution
     isValid() {
         var copy = this.clone();
         return copy.solve(0) < 2;
     }
 
+    // Generates a new solvable and valid sudoku board at this.difficulty
     generateNewBoard() {
         this.zeroCells();
         this.generateFullBoard();
@@ -205,12 +270,28 @@ class Board {
     }
 }
 
-
+/*
+ *  This is the entry point of the script when it loads
+ *  We first create a new board and generate the cells
+ *  into a valid sudoku board.
+ *  The difficulty indicates how many iterations the generation
+ *  step will fail in removing a new number from a fully
+ *  solved board.
+ *
+ *  HARD   = 10 failed attempts
+ *  MEDIUM = 5  failed attempts
+ *  EAZY   = 1  failed attempt
+ *
+ *  The difficultys are not final in any way and may change
+ *  at any time in development
+ *
+ */
 
 var board = new Board(HARD);
 board.generateNewBoard();
 updateBoard();
 
+// Updates the visual board, and checks if it is solved
 function updateBoard(){
     for (var i = 0; i < board.cells.length; i++) {
         let cell = board.cell(i);
@@ -226,13 +307,7 @@ function updateBoard(){
     if (board.check()) alert("You won");
 }
 
-function disableSel() {
-    let div = document.getElementById("sel");
-    if (div.classList.contains("reveal")){
-        div.classList.remove("reveal");
-    }
-}
-
+// Called when user is clicking a cell
 function selectNumber(id) {
     if (board.isCellGenerated(id)) return;
     let sel = document.getElementById("sel");
@@ -247,14 +322,17 @@ function selectNumber(id) {
     document.getElementById("index-holder").innerHTML = id.toString();
 }
 
-
-function changeNumber(number, id) {
+// Called when user clicks a number in the selector panel
+function changeNumber(number) {
     let div = document.getElementById("sel");
     if (!div.classList.contains("active")) return;
-    if (number.includes("Clear")) number = 0;
-    board.cells[id].val = parseInt(number);
-    document.getElementById("index-holder").innerHTML = id.toString();
-    document.getElementById(id.toString()).classList.remove("selected");
+
+    var index_holder =  document.getElementById('index-holder');
+    var index = index_holder.innerHTML;
+
+    board.cells[index].val = number;
+    index_holder.innerHTML = index.toString();
+    document.getElementById(index.toString()).classList.remove("selected");
     div.classList.remove("active");
     updateBoard()
 }
