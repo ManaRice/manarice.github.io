@@ -27,7 +27,6 @@ class Board {
     }
 
     moveUp(index) {
-        //console.log("Move up");
         let val = this.cells[index];
         this.cells[index] = 0;
         for (let i = index - this.width; i >= 0; i -= this.width) {
@@ -41,7 +40,6 @@ class Board {
     }
 
     moveDown(index) {
-        //console.log("Move Down");
         let val = this.cells[index];
         this.cells[index] = 0;
         for (let i = index + this.width; i < this.width * this.height; i += this.width) {
@@ -54,7 +52,6 @@ class Board {
     }
 
     moveRight(index) {
-        //console.log("Move Right");
         let val = this.cells[index];
         this.cells[index] = 0;
         for (let i = index + 1; i % this.width != index % this.width; i++) {
@@ -67,7 +64,6 @@ class Board {
     }
 
     moveLeft(index) {
-        //console.log("Move Left");
         let val = this.cells[index];
         this.cells[index] = 0;
         for (let i = index - 1; i % this.width != index % this.width; i--) {
@@ -109,17 +105,48 @@ class Board {
             console.log(row);
         }
     }
+
+    check() {
+        let solved = [
+            1,   2,   3,   4,
+            5,   6,   7,   8,
+            9,  10,  11,  12,
+            13, 14,  15,   0
+        ]
+
+        for (let i = 0; i < solved.length; i++){
+            if (this.cells[i] != solved[i]) return false;
+        }
+        return true;
+    }
 }
 
 let board = new Board();
 
 for (let i = 0; i < 300;) {
     let index = Math.floor(Math.random() * board.width * board.height - 1)
-    if (board.move(index)) {
-        //console.log(index);
-        i++
-    }
+    if (board.move(index)) i++;
 }
 
+// Updates the visual board, and checks if it is solved
+function updateBoard(){
+    for (let i = 0; i < board.cells.length; i++) {
+        let cell = board.cells[i];
+        let div = document.getElementById(i.toString());
+        if (!div) {
+            console.log("Div not found " + i);
+            console.log(board.length);
+            break;
+        }
+        if (cell > 0) div.innerHTML = cell.toString();
+        else div.innerHTML = "&nbsp&nbsp";
+    }
+    if (board.check()) alert("You won");
+}
 
-board.print()
+function userClick(index) {
+    if (board.move(Math.floor(index)))
+        updateBoard();
+}
+
+updateBoard();
