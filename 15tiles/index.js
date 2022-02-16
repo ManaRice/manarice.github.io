@@ -119,14 +119,16 @@ class Board {
         }
         return true;
     }
+
+    scramble() {
+        for (let i = 0; i < 300;) {
+            let index = Math.floor(Math.random() * this.width * this.height - 1)
+            if (this.move(index)) i++;
+        }
+    }
 }
 
-let board = new Board();
 
-for (let i = 0; i < 300;) {
-    let index = Math.floor(Math.random() * board.width * board.height - 1)
-    if (board.move(index)) i++;
-}
 
 // Updates the visual board, and checks if it is solved
 function updateBoard(){
@@ -141,7 +143,10 @@ function updateBoard(){
         if (cell > 0) div.innerHTML = cell.toString();
         else div.innerHTML = "&nbsp&nbsp";
     }
-    if (board.check()) alert("You won");
+    if (board.check()) {
+        alert("You won");
+        restart();
+    }
 }
 
 function userClick(index) {
@@ -149,4 +154,10 @@ function userClick(index) {
         updateBoard();
 }
 
-updateBoard();
+function restart(){
+    board.scramble();
+    updateBoard();
+}
+
+let board = new Board();
+restart();
