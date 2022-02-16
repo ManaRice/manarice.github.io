@@ -78,7 +78,7 @@ class Board {
     // Inatiate the board with zeros.
     zeroCells() {
         for (let i = 0; i < this.width * this.height; i++) {
-            this.cells.push(new Cell(0));
+            this.cells[i] = new Cell(0);
         }
     }
 
@@ -180,7 +180,6 @@ class Board {
             if (!this.uniqueArray(row) || !this.uniqueArray(col) || !this.uniqueArray(sqr))
                 return false;
         }
-
         return true;
     }
 
@@ -271,27 +270,6 @@ class Board {
     }
 }
 
-/*
- *  This is the entry point of the script when it loads
- *  We first create a new board and generate the cells
- *  into a valid sudoku board.
- *  The difficulty indicates how many iterations the generation
- *  step will fail in removing a new number from a fully
- *  solved board.
- *
- *  HARD   = 10 failed attempts
- *  MEDIUM = 5  failed attempts
- *  EAZY   = 1  failed attempt
- *
- *  The difficultys are not final in any way and may change
- *  at any time in development
- *
- */
-
-let board = new Board(HARD);
-board.generateNewBoard();
-updateBoard();
-
 // Updates the visual board, and checks if it is solved
 function updateBoard(){
     for (let i = 0; i < board.cells.length; i++) {
@@ -304,8 +282,12 @@ function updateBoard(){
         if (cell.val > 0) div.innerHTML = cell.val.toString();
         else div.innerHTML = "&nbsp&nbsp";
         if (cell.gen && !div.classList.contains("generated")) div.classList.add("generated");
+        if (!cell.gen && div.classList.contains("generated")) div.classList.remove("generated");
     }
-    if (board.check()) alert("You won");
+    if (board.check()) {
+        alert("You won");
+        restart();
+    }
 }
 
 // Called when user is clicking a cell
@@ -337,3 +319,29 @@ function changeNumber(number) {
     div.classList.remove("active");
     updateBoard()
 }
+
+function restart() {
+    console.log("restarting")
+    board.generateNewBoard();
+    updateBoard();
+}
+
+/*
+ *  This is the entry point of the script when it loads
+ *  We first create a new board and generate the cells
+ *  into a valid sudoku board.
+ *  The difficulty indicates how many iterations the generation
+ *  step will fail in removing a new number from a fully
+ *  solved board.
+ *
+ *  HARD   = 10 failed attempts
+ *  MEDIUM = 5  failed attempts
+ *  EAZY   = 1  failed attempt
+ *
+ *  The difficultys are not final in any way and may change
+ *  at any time in development
+ *
+ */
+
+let board = new Board(HARD);
+restart();
