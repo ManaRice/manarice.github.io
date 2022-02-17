@@ -144,20 +144,37 @@ function updateBoard(){
         else div.innerHTML = "&nbsp&nbsp";
     }
     if (board.check()) {
-        alert("You won");
+        window.clearInterval(timer);
+        alert("You won in " + (Math.round(timer_time * 10) / 10).toString() + " seconds");
         restart();
     }
 }
 
+function updateTime() {
+    timer_time += 0.1;
+}
+
 function userClick(index) {
+    if (!timer_running) {
+        timer_running = true;
+        timer = window.setInterval(updateTime, 100);
+    }
     if (board.move(Math.floor(index)))
         updateBoard();
 }
 
 function restart(){
+    timer_time = 0.0;
+    if (timer_running) {
+        window.clearInterval(timer);
+        timer_running = false;
+    }
     board.scramble();
     updateBoard();
 }
 
 let board = new Board();
+let timer;
+let timer_time;
+let timer_running;
 restart();
