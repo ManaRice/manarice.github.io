@@ -145,13 +145,19 @@ function updateBoard(){
     }
     if (board.check()) {
         window.clearInterval(timer);
-        alert("You won in " + (Math.round(timer_time * 10) / 10).toString() + " seconds");
+        alert("You won in " + timer_time.toFixed(1) + " seconds");
         restart();
     }
 }
 
 function updateTime() {
     timer_time += 0.1;
+    updateTimeDiv();
+}
+
+function updateTimeDiv() {
+    let timer = document.getElementById("timer");
+    timer.innerHTML = timer_time.toFixed(1);
 }
 
 function userClick(index) {
@@ -171,6 +177,7 @@ function restart(){
     }
     board.scramble();
     updateBoard();
+    updateTimeDiv();
 }
 
 let board = new Board();
