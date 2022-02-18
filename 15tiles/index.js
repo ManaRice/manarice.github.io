@@ -155,12 +155,13 @@ function updateTime() {
 }
 
 function userClick(index) {
-    if (!timer_running) {
-        timer_running = true;
-        timer = window.setInterval(updateTime, 100);
-    }
-    if (board.move(Math.floor(index)))
+    if (board.move(Math.floor(index))){
+        if (!timer_running) {
+            timer_running = true;
+            timer = window.setInterval(updateTime, 100);
+        }
         updateBoard();
+    }
 }
 
 function restart(){
