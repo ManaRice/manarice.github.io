@@ -145,7 +145,7 @@ function updateBoard(){
     }
     if (board.check()) {
         window.clearInterval(timer);
-        alert("You won in " + timer_time.toFixed(1) + " seconds");
+        alert("You won in " + timer_time.toFixed(1) + " seconds and " + moves + " moves");
         restart();
     }
 }
@@ -165,12 +165,15 @@ function userClick(index) {
         timer_running = true;
         timer = window.setInterval(updateTime, 100);
     }
-    if (board.move(Math.floor(index)))
+    if (board.move(Math.floor(index))) {
         updateBoard();
+        moves++;
+    }
 }
 
 function restart(){
     timer_time = 0.0;
+    moves = 0;
     if (timer_running) {
         window.clearInterval(timer);
         timer_running = false;
@@ -184,4 +187,5 @@ let board = new Board();
 let timer;
 let timer_time;
 let timer_running;
+let moves;
 restart();
