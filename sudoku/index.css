@@ -4,6 +4,7 @@ body {
     flex-direction: column;
     margin-top: 0;
     background-color: #667;
+    font-family: Helvetica;
 }
 
 main {
