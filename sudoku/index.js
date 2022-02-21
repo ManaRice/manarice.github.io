@@ -96,11 +96,15 @@ class Board {
 
     // Used to generate random boards
     // Stolen from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-    shuffleNumberlist(){
-        for (let i = this.numberList.length - 1; i > 0; i--) {
+
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
             let rand = Math.floor(Math.random() * (i + 1));
-            [this.numberList[i], this.numberList[rand]] = [this.numberList[rand], this.numberList[i]]
+            [array[i], array[rand]] = [array[rand], array[i]]
         }
+    }
+    shuffleNumberlist(){
+        this.shuffleArray(this.numberList)
     }
 
     // Check if an array contains only unique elements
@@ -250,6 +254,7 @@ class Board {
 
     // Generates a new solvable and valid sudoku board at this.difficulty
     generateNewBoard() {
+        console.log("Generate 1")
         this.zeroCells();
         this.generateFullBoard();
         let index;
@@ -266,6 +271,35 @@ class Board {
             } while(this.isValid());
 
             this.cells[index] = new Cell(cellVal);
+        }
+    }
+    getRandomIndecies() {
+        let indecies = [];
+        for (let i = 0; i < this.width * this.height; ++i) {
+            indecies[i] = i;
+        }
+        this.shuffleArray(indecies);
+        return indecies;
+
+    }
+
+    generateNewBoard2() {
+        console.log("Generate 2")
+        this.zeroCells();
+        this.generateFullBoard();
+        let failedCount = 0;
+        let cellVal;
+        let indecies = this.getRandomIndecies();
+
+        for (let i = 0; i < indecies.length; i++) {
+            cellVal = this.cells[indecies[i]].val;
+            this.cells[indecies[i]] = new Cell(0);
+
+            if (!this.isValid()) {
+                this.cells[indecies[i]] = new Cell(cellVal);
+                if (++failedCount >= this.difficulty)
+                    break;
+            }
         }
     }
 }
@@ -321,7 +355,6 @@ function changeNumber(number) {
 }
 
 function restart() {
-    console.log("restarting")
     board.generateNewBoard();
     updateBoard();
 }
