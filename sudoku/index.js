@@ -254,7 +254,6 @@ class Board {
 
     // Generates a new solvable and valid sudoku board at this.difficulty
     generateNewBoard() {
-        console.log("Generate 1")
         this.zeroCells();
         this.generateFullBoard();
         let index;
@@ -284,7 +283,6 @@ class Board {
     }
 
     generateNewBoard2() {
-        console.log("Generate 2")
         this.zeroCells();
         this.generateFullBoard();
         let failedCount = 0;
