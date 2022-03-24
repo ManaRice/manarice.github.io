@@ -26,6 +26,10 @@ class Board {
         return false;
     }
 
+    indexOf(n) {
+        return this.cells.indexOf(parseInt(n));
+    }
+
     moveUp(index) {
         let val = this.cells[index];
         this.cells[index] = 0;
@@ -122,7 +126,8 @@ class Board {
 
     scramble() {
         for (let i = 0; i < 300;) {
-            let index = Math.floor(Math.random() * this.width * this.height - 1)
+            let index = Math.floor(Math.random() * this.width * this.height)
+            console.log(index);
             if (this.move(index)) i++;
         }
     }
@@ -133,16 +138,12 @@ class Board {
 // Updates the visual board, and checks if it is solved
 function updateBoard(){
     for (let i = 0; i < board.cells.length; i++) {
-        let cell = board.cells[i];
-        let div = document.getElementById(i.toString());
-        if (!div) {
-            console.log("Div not found " + i);
-            console.log(board.length);
-            break;
-        }
-        if (cell > 0) div.innerHTML = cell.toString();
-        else div.innerHTML = "&nbsp&nbsp";
+        let x = i % board.width;
+        let y = Math.floor(i / board.width);
+        let translate = "translate(" + (x * 100) + "%, " + (y * 100) + "%)"
+        document.getElementById(board.cells[i]).style.transform = translate;
     }
+
     if (board.check()) {
         window.clearInterval(timer);
         alert("You won in " + (Math.round(timer_time * 10) / 10).toString() + " seconds");
@@ -154,8 +155,8 @@ function updateTime() {
     timer_time += 0.1;
 }
 
-function userClick(index) {
-    if (board.move(Math.floor(index))){
+function userClick(id) {
+    if (board.move(board.indexOf(id))){
         if (!timer_running) {
             timer_running = true;
             timer = window.setInterval(updateTime, 100);
