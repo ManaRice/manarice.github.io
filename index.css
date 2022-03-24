@@ -3,4 +3,42 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: Helvetica;
+    background-color: #667;
+}
+
+#game-section {
+    display: flex;
+    flex-flow: column;
+}
+
+.game-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: #000;
+    background-color: #555;
+    border-color: #222;
+    border-radius: 1%;
+    border-width: 0.2rem;
+    border-style: solid;
+    margin-bottom: 2rem;
+    padding: 2rem;
+}
+
+.game-card-body {
+    display: flex;
+}
+
+.game-card-text {
+    font-size: large;
+    margin-left: 2rem;
+    font-weight: bold;
+}
+
+.warn {
+    color: gold
+}
+
+img {
+    max-width: 200px;
 }

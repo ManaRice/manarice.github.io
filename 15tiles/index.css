@@ -29,9 +29,8 @@ p {
     display: flex;
     width: 42.2vw;
     min-width: 330px;
-    height: 39.6vw;
-    min-height: 320px;
-    align-items: space-between;
+    height: 42.2vw;
+    min-height: 330px;
     flex-direction: column;
     font-size: 1.7rem;
     border-style: solid;

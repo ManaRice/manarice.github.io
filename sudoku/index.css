@@ -30,7 +30,6 @@ p {
     min-width: 330px;
     height: 43vw;
     min-height: 330px;
-    align-items: space-between;
     flex-direction: column;
     font-size: 1.7rem;
 }
