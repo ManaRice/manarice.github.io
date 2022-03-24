@@ -50,6 +50,7 @@ p {
     width: 24.75%;
     height: 24.73%;
     transition: 200ms;
+    user-select: none;
 }
 
 .zero {
