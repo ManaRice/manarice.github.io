@@ -127,7 +127,6 @@ class Board {
     scramble() {
         for (let i = 0; i < 300;) {
             let index = Math.floor(Math.random() * this.width * this.height)
-            console.log(index);
             if (this.move(index)) i++;
         }
     }
