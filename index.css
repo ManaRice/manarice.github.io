@@ -1,10 +1,17 @@
 body {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     font-family: Helvetica;
     background-color: #667;
 }
+
+main {
+    max-width: 70%;
+}
+
+/* GAME CSS */
 
 #game-section {
     display: flex;
